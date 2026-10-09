@@ -1,0 +1,26 @@
+[project]
+name = "lowrank-gpu-ladder"
+version = "0.1.0"
+description = "From a NumPy loop to fused Triton kernels: an optimization ladder for patch-wise MP-PCA denoising."
+requires-python = ">=3.12"
+dependencies = [
+    "numpy",
+    "torch",
+    "triton; sys_platform == 'linux'",
+    "nvmath-python; sys_platform == 'linux'",
+    "matplotlib",
+]
+
+[tool.uv]
+package = false
+
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cu130", marker = "sys_platform == 'linux'" }]
+
+[tool.ruff]
+line-length = 88
